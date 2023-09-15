@@ -1,0 +1,42 @@
+﻿// ComTest.idl: ComTest 的 IDL 源
+//
+
+// 此文件将由 MIDL 工具处理以
+// 生成类型库(ComTest.tlb)和封送处理代码。
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	//接口定义
+
+	object,										//所定义的接口是一个COM接口
+	uuid(9c366235-6158-4ef4-a279-91077295405f),	//相应的接口IID
+	dual,
+	nonextensible,
+	pointer_default(unique)						//默认的次级指针类型为uniqu
+]
+interface ITemp : IDispatch
+{
+	// 方法接口设置
+	[id(1)] HRESULT Number([in] LONG __num , [out, retval] LONG * __result);
+};
+[
+	//类型库定义，只能包含一个，所有的类对象coclass都必须在其中定义
+
+	uuid(18f82e34-9b50-4e39-94f5-9dc937cf6d57),
+	version(1.0),		//类型库版本号
+]
+library ComTestLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(0e57206e-5d60-494f-a849-7fc37f769e6a)
+	]
+	coclass Temp
+	{
+		[default] interface ITemp;
+	};
+};
+
+import "shobjidl.idl";
